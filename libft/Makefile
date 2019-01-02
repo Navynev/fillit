@@ -6,7 +6,7 @@
 #    By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 16:55:00 by ndelhomm          #+#    #+#              #
-#    Updated: 2018/11/20 19:05:14 by ndelhomm         ###   ########.fr        #
+#    Updated: 2019/01/02 15:13:38 by ndelhomm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,7 @@ SRC = ft_lstdel.c \
 	  ft_str_is_uppercase.c \
 	  ft_str_is_printable.c \
 	  ft_str_is_numeric.c \
+	get_next_line.c\
 
 HEADER = libft.h
 

@@ -6,7 +6,7 @@
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 19:29:53 by ndelhomm          #+#    #+#             */
-/*   Updated: 2018/11/20 20:02:12 by ndelhomm         ###   ########.fr       */
+/*   Updated: 2019/01/02 15:14:43 by ndelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,5 +170,7 @@ void							ft_lstiter(t_list *lst,
 
 t_list							*ft_lstmap(t_list *lst,
 								t_list *(*f)(t_list *elem));
+
+int								get_next_line(const int fd, char **line);
 
 #endif

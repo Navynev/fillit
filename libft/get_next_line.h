@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 16:59:48 by ndelhomm          #+#    #+#             */
-/*   Updated: 2018/12/23 17:07:25 by ndelhomm         ###   ########.fr       */
+/*   Created: 2018/11/30 11:08:46 by ndelhomm          #+#    #+#             */
+/*   Updated: 2019/01/02 15:15:20 by ndelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 10
+# include "libft.h"
 
-int		main(int argc, char **argv)
-{
-	int	fillit_piece;
+int		get_next_line(const int fd, char **line);
 
-	if (argc != 2)
-	{
-		ft_pustr("usage: source file missing\n");
-	if ((fillit_piece = read(open(argv[1], O_RDONLY))) == 0)
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-		
+#endif
