@@ -6,7 +6,7 @@
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 11:52:15 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/01/02 15:01:26 by ndelhomm         ###   ########.fr       */
+/*   Updated: 2019/01/03 13:46:12 by jbrisset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		check_general_conformity(int fd)
 		++i;
 		if (i > 130)
 			return (0);
-	}	
+	}
 	if (*line == 0)
 		return (0);
 	printf("%d block(s)\n", i/5);
