@@ -6,11 +6,11 @@
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 11:52:15 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/01/03 13:46:12 by jbrisset         ###   ########.fr       */
+/*   Updated: 2019/01/03 16:04:15 by jbrisset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "fillit.h"
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -99,7 +99,7 @@ int		check_general_conformity(int fd)
 	}
 	if (*line == 0)
 		return (0);
-	printf("%d block(s)\n", i/5);
+	printf("%d block(s)\n", i / 5);
 	return (i / 5);
 }
 
@@ -135,7 +135,7 @@ char	**get_megablock(int fd, int block_nb, int endl)
 	return (tetris);
 }
 
-int		main(int argc, char **argv)
+/*int		main(int argc, char **argv)
 {
 	int		fd;
 	char	*line;
@@ -166,4 +166,4 @@ int		main(int argc, char **argv)
 		i++;
 	}
 	return (0);
-}
+}*/

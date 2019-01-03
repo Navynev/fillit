@@ -6,9 +6,11 @@
 /*   By: jbrisset <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 13:46:21 by jbrisset          #+#    #+#             */
-/*   Updated: 2019/01/03 14:30:42 by jbrisset         ###   ########.fr       */
+/*   Updated: 2019/01/03 16:25:06 by jbrisset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fillit.h"
 
 int	get_min_size(int tetri_nb)
 {
@@ -26,35 +28,65 @@ int	allocate_square(char ***square, int size)
 	int	j;
 
 	i = 0;
-	if (!(square = (char **)malloc(sizeof(char *) * size)))
+	if (!(*square = (char **)malloc(sizeof(char *) * size)))
 		return (0);
-	while (i < size && i++)
+	while (i < size)
 	{
 		j = 0;
-		if (!(square[i] = ft_strnew(size)))
-		{
-			free(square);
+		if (!((*square)[i] = ft_strnew(size)))
 			return (0);
+		while (j < size)
+		{
+			(*square)[i][j] = '.';
+			j++;
 		}
-		while (j < size && j++)
-			square[i][j] = '.';
+		i++;
 	}
 	return (1);
 }
 
+int	main(int argc, char **argv)
+{
+	int		fd;
+	char	*line;
+	char	*tetri;
+	int		block_nb;
+	char	**megablock;
+	int		i;
+	int		error;
+	char	**square;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	error = 0;
+	i = 0;
+	square = NULL;
+	(void)argc;
+	line = ft_strdup("");
+	tetri = ft_strdup("");
+	fd = open((argv[1]), O_RDONLY);
+	if (!(block_nb = 10))
+	{
+		printf("error in file conformity\n");
+		return (0);
+	}
+	close(fd);
+	fd = open((argv[1]), O_RDONLY);
+	megablock = get_megablock(fd, block_nb, 0);
+	close(fd);
+	/*while (i < block_nb)
+	{
+		if (!(piece_conformity(megablock[i])))
+			error++;
+		i++;
+	}
+	if (error)
+		printf("error in tetriminos");
+	*/
+	printf("%d\n", get_min_size(block_nb));
+	allocate_square(&square, get_min_size(block_nb));
+	while (i < get_min_size(block_nb))
+	{
+		printf("%s\n", square[i]);
+		i++;
+	}
+	return (0);
+}
