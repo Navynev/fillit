@@ -6,7 +6,7 @@
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 11:52:15 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/01/04 12:46:05 by ndelhomm         ###   ########.fr       */
+/*   Updated: 2019/01/03 16:04:15 by jbrisset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 #include <fcntl.h>
 
 /*
- ** >> This fct's goal is to check if each (#) of the Tetrimino
+ ** This fct's goal is to check if each (#) of the Tetrimino
  ** is adjacent to another (#).
- ** >> We also check if the number of points of contact between each (#) :
+
+ ** We also check if the number of points of contact between each (#) :
  ** is weather 3 (shapes: S, Z, T, J, L, I),
  ** or 4 (a square shape)
  */
@@ -48,7 +49,7 @@ int	hashtag_adjacent(char *tetrimino)
 }
 
 /*
- ** >> This fct's goal is to check the conformity of each piece:
+ ** This fct's goal is to check the conformity of each piece:
  ** 4 lines, 4 (#), 3 (\n) and 12 (.)
  */
 
@@ -76,10 +77,9 @@ int		piece_conformity(char *tetrimino)
 }
 
 /*
-** this fct returns the number of tetri in the fd
-** Check if file contains blocks made of 4 lines with only one '\n'
-** between them.
-*/
+  Check if file contains blocks made of 4 lines with only one '\n'
+  between them.
+ */
 int		check_general_conformity(int fd)
 {
 	char	*line;

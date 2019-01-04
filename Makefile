@@ -10,24 +10,19 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fillit
-
+NAME = fillit.out
 FLAG = -Wall -Werror -Wextra
-
-SRC =
-
+SRC = check_tetriminos.c main.c
 HEADER = fillit.h
-
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:%.c=%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADER)
+	gcc $(FLAG) -c $(SRC) -I $(HEADER) 
 	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	/bin/rm -rf $(OBJ)
 
-%.o: %.c
-	gcc -c $(FLAG) -o $@ $? -I
 clean:
 	/bin/rm -f $(OBJ)
 
