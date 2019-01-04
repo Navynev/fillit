@@ -17,21 +17,21 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-struct item {
+typedef struct	s_item {
 	int		height;
 	int		width;
 	char	tetri[5][5];
 	int		x;
 	int		y;
-};
+}				t_item;
+
+t_item items[26];
 
 char	**get_megablock(int fd, int block_nb, int endl);
 int		check_general_conformity(int fd);
 int		piece_conformity(char *tetrimino);
 int		get_min_size(int tetri_nb);
 int		allocate_square(char ***square, int size);
-
-struct item items[26];
 
 #endif
 

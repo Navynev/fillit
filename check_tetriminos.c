@@ -77,9 +77,10 @@ int		piece_conformity(char *tetrimino)
 }
 
 /*
-  Check if file contains blocks made of 4 lines with only one '\n'
-  between them.
- */
+** Check if file contains blocks made of 4 lines with only one '\n'
+** between them.
+*/
+
 int		check_general_conformity(int fd)
 {
 	char	*line;

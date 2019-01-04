@@ -54,6 +54,37 @@ int		allocate_square(char ***square, int size)
 	}
 	return (i);
 }
+
+t_item tetri_to_item(char *str)
+{
+	int	i;
+	t_item item;
+
+	i = 0;
+	while (str[i] && i++)
+	{
+		if (i % 4 == 0 && j++)
+			ft_strncpy(item.tetri[j], str[i], 4);
+	}
+
+}
+
+int	megablock_to_items(char **megablock, int block_nb)
+{
+	t_item	item;
+	int		i;
+
+	i = 0;
+	while (i < block_nb && i++)
+	{
+		if (piece_conformity(megablock[i]))
+			item = tetri_to_item(megablock[i]);
+		else
+			return (0);
+	}
+
+}
+
 /*int	main(int argc, char **argv)
 {
 	int		fd;
