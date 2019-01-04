@@ -6,7 +6,7 @@
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 11:52:15 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/01/03 16:04:15 by jbrisset         ###   ########.fr       */
+/*   Updated: 2019/01/04 12:46:05 by ndelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@ int		piece_conformity(char *tetrimino)
 }
 
 /*
-  Check if file contains blocks made of 4 lines with only one '\n'
-  between them.
- */
+** this fct returns the number of tetri in the fd
+** Check if file contains blocks made of 4 lines with only one '\n'
+** between them.
+*/
 int		check_general_conformity(int fd)
 {
 	char	*line;

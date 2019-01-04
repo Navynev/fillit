@@ -3,89 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrisset <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/03 13:46:21 by jbrisset          #+#    #+#             */
-/*   Updated: 2019/01/03 16:25:06 by jbrisset         ###   ########.fr       */
+/*   Created: 2019/01/04 11:49:01 by ndelhomm          #+#    #+#             */
+/*   Updated: 2019/01/04 12:08:10 by ndelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	get_min_size(int tetri_nb)
+int		main(int argc, char **argv)
 {
-	int	size;
+	int fd;
+	int i;
+	int size;
+	int tetri_nb;
+	char **square;
 
-	size = 2;
-	while (tetri_nb * 4 > size * size)
-		size++;
-	return (size);
-}
-
-int	allocate_square(char ***square, int size)
-{
-	int	i;
-	int	j;
-
+	fd = open((argv[1]), O_RDONLY);
 	i = 0;
-	if (!(*square = (char **)malloc(sizeof(char *) * size)))
-		return (0);
-	while (i < size)
-	{
-		j = 0;
-		if (!((*square)[i] = ft_strnew(size)))
-			return (0);
-		while (j < size)
-		{
-			(*square)[i][j] = '.';
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	main(int argc, char **argv)
-{
-	int		fd;
-	char	*line;
-	char	*tetri;
-	int		block_nb;
-	char	**megablock;
-	int		i;
-	int		error;
-	char	**square;
-
-	error = 0;
-	i = 0;
+	tetri_nb = 0;
+	size = get_min_size(tetri_nb);
+	tetri_nb = check_general_conformity(fd);
 	square = NULL;
 	(void)argc;
-	line = ft_strdup("");
-	tetri = ft_strdup("");
-	fd = open((argv[1]), O_RDONLY);
-	if (!(block_nb = 10))
+	while (i < size)
 	{
-		printf("error in file conformity\n");
-		return (0);
-	}
-	close(fd);
-	fd = open((argv[1]), O_RDONLY);
-	megablock = get_megablock(fd, block_nb, 0);
-	close(fd);
-	/*while (i < block_nb)
-	{
-		if (!(piece_conformity(megablock[i])))
-			error++;
-		i++;
-	}
-	if (error)
-		printf("error in tetriminos");
-	*/
-	printf("%d\n", get_min_size(block_nb));
-	allocate_square(&square, get_min_size(block_nb));
-	while (i < get_min_size(block_nb))
-	{
-		printf("%s\n", square[i]);
+		printf("%d\n", allocate_square(&square, size));
 		i++;
 	}
 	return (0);
