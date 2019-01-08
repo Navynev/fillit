@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
-#include <fcntl.h>
 
 /*
  ** This fct's goal is to check if each (#) of the Tetrimino
@@ -104,6 +102,45 @@ int		check_general_conformity(int fd)
 	printf("%d block(s)\n", i / 5);
 	return (i / 5);
 }
+
+int		check_all(int fd)
+{
+	char	*line;
+	int		res;
+	int		i;
+
+	i = 1;
+	line = ft_strdup("");
+	while ((res = get_next_line(fd, &line)) > 0)
+	{
+		if ((i % 5 == 0) && line[0] != 0)
+			return (0);
+		if ((i % 5 != 0) && ft_strlen(line) != 4)
+			return (0);
+		++i;
+		if (i > 130)
+			return (0);
+	}
+	if (*line == 0)
+		return (0);
+	printf("%d block(s)\n", i / 5);
+	return (i / 5);
+}
+
+char	**str_to_tab(char *str)
+{
+	int tetritab;
+	int	i;
+
+
+	while (str[i])
+	{
+
+	}
+}
+
+
+
 
 char	**get_megablock(int fd, int block_nb, int endl)
 {

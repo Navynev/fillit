@@ -13,10 +13,8 @@
 #include "fillit.h"
 
 /*
-** This fct's goal is to return the minimum square dimension size,
-** given the number of tetri in the fd
+** Get the minimum square dimension size given the number of tetri in the file.
 */
-
 int	get_min_size(int tetri_nb)
 {
 	int	size;
@@ -28,10 +26,9 @@ int	get_min_size(int tetri_nb)
 }
 
 /*
-** This fct allocates memory and fill a fresh square with dots, given the
-** square dimension size
+** Allocates memory and fill a fresh square with dots, given the square
+** dimension size.
 */
-
 int		allocate_square(char ***square, int size)
 {
 	int	i;
@@ -52,21 +49,23 @@ int		allocate_square(char ***square, int size)
 		}
 		i++;
 	}
-	return (i);
+	return (1);
 }
+
 
 t_item tetri_to_item(char *str)
 {
 	int	i;
+	int j;
 	t_item item;
 
 	i = 0;
+	j = 0;
 	while (str[i] && i++)
 	{
 		if (i % 4 == 0 && j++)
 			ft_strncpy(item.tetri[j], str[i], 4);
 	}
-
 }
 
 int	megablock_to_items(char **megablock, int block_nb)
