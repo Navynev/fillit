@@ -17,15 +17,13 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-typedef struct	s_item {
+struct	s_item {
 	int		height;
 	int		width;
 	char	tetri[5][5];
 	int		x;
 	int		y;
-}				t_item;
-
-t_item items[26];
+}				t_items[26];
 
 char	**get_megablock(int fd, int block_nb, int endl);
 int		check_general_conformity(int fd);

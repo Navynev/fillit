@@ -6,7 +6,7 @@
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 11:52:15 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/01/02 15:01:26 by ndelhomm         ###   ########.fr       */
+/*   Updated: 2019/01/05 10:57:23 by ndelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,35 +135,15 @@ char	**get_megablock(int fd, int block_nb, int endl)
 	return (tetris);
 }
 
-int		main(int argc, char **argv)
-{
-	int		fd;
-	char	*line;
-	char	*tetri;
-	int		block_nb;
-	char	**megablock;
-	int		i;
+/*
+** This fct's goal is to put each tetrimino in a tab struct
+**
+**
+*/
 
-	i = 0;
-	(void)argc;
-	line = ft_strdup("");
-	tetri = ft_strdup("");
-	fd = open((argv[1]), O_RDONLY);
-	if (!(block_nb = check_general_conformity(fd)))
+t_struct	*tetri_to_struct(char *tetris)
+{
+	while(tetris[i])
 	{
-		printf("error in check_general_conformity\n");
-		return (0);
-	}
-	close(fd);
-	fd = open((argv[1]), O_RDONLY);
-	megablock = get_megablock(fd, block_nb, 1);
-	while (i < block_nb)
-	{
-		if (piece_conformity(megablock[i]))
-			printf("Tetrimino %d is valid\n", i + 1);
-		else
-			printf("Tetrimino %d is not valid\n", i + 1);
-		i++;
-	}
-	return (0);
-}
+
+

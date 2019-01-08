@@ -69,7 +69,7 @@ int		piece_conformity(char *tetrimino)
 			line++;
 		i++;
 	}
-	if (hashtag == 4  /*&& line == 4*/ && hashtag_adjacent(tetrimino))
+	if (hashtag == 4  && line == 4 && hashtag_adjacent(tetrimino))
 		return (1);
 	return (0);
 }
@@ -103,45 +103,6 @@ int		check_general_conformity(int fd)
 	return (i / 5);
 }
 
-int		check_all(int fd)
-{
-	char	*line;
-	int		res;
-	int		i;
-
-	i = 1;
-	line = ft_strdup("");
-	while ((res = get_next_line(fd, &line)) > 0)
-	{
-		if ((i % 5 == 0) && line[0] != 0)
-			return (0);
-		if ((i % 5 != 0) && ft_strlen(line) != 4)
-			return (0);
-		++i;
-		if (i > 130)
-			return (0);
-	}
-	if (*line == 0)
-		return (0);
-	printf("%d block(s)\n", i / 5);
-	return (i / 5);
-}
-
-char	**str_to_tab(char *str)
-{
-	int tetritab;
-	int	i;
-
-
-	while (str[i])
-	{
-
-	}
-}
-
-
-
-
 char	**get_megablock(int fd, int block_nb, int endl)
 {
 	char	**tetris;
@@ -174,35 +135,34 @@ char	**get_megablock(int fd, int block_nb, int endl)
 	return (tetris);
 }
 
-/*int		main(int argc, char **argv)
-{
-	int		fd;
-	char	*line;
-	char	*tetri;
-	int		block_nb;
-	char	**megablock;
-	int		i;
+// int		main(int argc, char **argv)
+// {
+// 	int		fd;
+// 	char	*line;
+// 	char	*tetri;
+// 	int		block_nb;
+// 	char	**megablock
 
-	i = 0;
-	(void)argc;
-	line = ft_strdup("");
-	tetri = ft_strdup("");
-	fd = open((argv[1]), O_RDONLY);
-	if (!(block_nb = check_general_conformity(fd)))
-	{
-		printf("error in check_general_conformity\n");
-		return (0);
-	}
-	close(fd);
-	fd = open((argv[1]), O_RDONLY);
-	megablock = get_megablock(fd, block_nb, 1);
-	while (i < block_nb)
-	{
-		if (piece_conformity(megablock[i]))
-			printf("Tetrimino %d is valid\n", i + 1);
-		else
-			printf("Tetrimino %d is not valid\n", i + 1);
-		i++;
-	}
-	return (0);
-}*/
+// 	i = 0;
+// 	(void)argc;
+// 	line = ft_strdup("");
+// 	tetri = ft_strdup("");
+// 	fd = open((argv[1]), O_RDONLY);
+// 	if (!(block_nb = check_general_conformity(fd)))
+// 	{
+// 		printf("error in check_general_conformity\n");
+// 		return (0);
+// 	}
+// 	close(fd);
+// 	fd = open((argv[1]), O_RDONLY);
+// 	megablock = get_megablock(fd, block_nb, 1);
+// 	while (i < block_nb)
+// 	{
+// 		if (piece_conformity(megablock[i]))
+// 			printf("Tetrimino %d is valid\n", i + 1);
+// 		else
+// 			printf("Tetrimino %d is not valid\n", i + 1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
