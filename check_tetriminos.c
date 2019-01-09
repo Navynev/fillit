@@ -79,14 +79,16 @@ int		piece_conformity(char *tetrimino)
 ** between them.
 */
 
-int		check_general_conformity(int fd)
+int		check_general_conformity(char *file)
 {
 	char	*line;
 	int		res;
 	int		i;
+	int		fd;
 
 	i = 1;
 	line = ft_strdup("");
+	fd = open(file, O_RDONLY);
 	while ((res = get_next_line(fd, &line)) > 0)
 	{
 		if ((i % 5 == 0) && line[0] != 0)
@@ -100,6 +102,7 @@ int		check_general_conformity(int fd)
 	if (*line == 0)
 		return (0);
 	printf("%d block(s)\n", i / 5);
+	close(fd);
 	return (i / 5);
 }
 

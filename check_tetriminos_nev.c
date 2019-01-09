@@ -134,16 +134,3 @@ char	**get_megablock(int fd, int block_nb, int endl)
 	}
 	return (tetris);
 }
-
-/*
-** This fct's goal is to put each tetrimino in a tab struct
-**
-**
-*/
-
-t_struct	*tetri_to_struct(char *tetris)
-{
-	while(tetris[i])
-	{
-
-

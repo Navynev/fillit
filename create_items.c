@@ -24,7 +24,7 @@ void    fill_tetri(char *buf, int index)
     int     k;
 
     i = 0;
-    k = 0
+    k = 0;
     j = 0;
     while (buf[i])
     {
