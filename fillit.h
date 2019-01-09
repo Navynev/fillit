@@ -25,29 +25,10 @@ struct	s_item {
 	int		y;
 }				t_items[26];
 
-char	**get_megablock(int fd, int block_nb, int endl);
-int		check_general_conformity(char *file);
-int		piece_conformity(char *tetrimino);
+int		check_and_read(char *file);
+void	fill_item(char *buf, int index);
+void	upleft_tetri(char ***tetri);
 int		get_min_size(int tetri_nb);
 int		allocate_square(char ***square, int size);
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

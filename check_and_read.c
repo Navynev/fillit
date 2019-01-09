@@ -6,18 +6,17 @@
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 11:52:15 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/01/05 10:57:23 by ndelhomm         ###   ########.fr       */
+/*   Updated: 2019/01/03 16:04:15 by jbrisset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
+#include "fillit.h"
 
 /*
- ** >> This fct's goal is to check if each (#) of the Tetrimino
+ ** This fct's goal is to check if each (#) of the Tetrimino
  ** is adjacent to another (#).
- ** >> We also check if the number of points of contact between each (#) :
+
+ ** We also check if the number of points of contact between each (#) :
  ** is weather 3 (shapes: S, Z, T, J, L, I),
  ** or 4 (a square shape)
  */
@@ -40,7 +39,7 @@ int	hashtag_adjacent(char *tetrimino)
 		}
 		i++;
 	}
-	printf("[PTS DE CONTACT = %d]\n", contact);
+	// printf("[PTS DE CONTACT = %d]\n", contact);
 	if (contact == 3 || contact == 4)
 		return (1);
 	else
@@ -48,7 +47,7 @@ int	hashtag_adjacent(char *tetrimino)
 }
 
 /*
- ** >> This fct's goal is to check the conformity of each piece:
+ ** This fct's goal is to check the conformity of each piece:
  ** 4 lines, 4 (#), 3 (\n) and 12 (.)
  */
 
@@ -70,23 +69,26 @@ int		piece_conformity(char *tetrimino)
 			line++;
 		i++;
 	}
-	if (hashtag == 4  /*&& line == 4*/ && hashtag_adjacent(tetrimino))
+	if (hashtag == 4  && line == 4 && hashtag_adjacent(tetrimino))
 		return (1);
 	return (0);
 }
 
 /*
-  Check if file contains blocks made of 4 lines with only one '\n'
-  between them.
- */
-int		check_general_conformity(int fd)
+** Check if file contains blocks made of 4 lines with only one '\n'
+** between them.
+*/
+
+int		check_general_conformity(char *file)
 {
 	char	*line;
 	int		res;
 	int		i;
+	int		fd;
 
 	i = 1;
 	line = ft_strdup("");
+	fd = open(file, O_RDONLY);
 	while ((res = get_next_line(fd, &line)) > 0)
 	{
 		if ((i % 5 == 0) && line[0] != 0)
@@ -96,41 +98,49 @@ int		check_general_conformity(int fd)
 		++i;
 		if (i > 130)
 			return (0);
-	}	
+	}
 	if (*line == 0)
 		return (0);
-	printf("%d block(s)\n", i/5);
+	// printf("%d block(s)\n", i / 5);
+	close(fd);
 	return (i / 5);
 }
 
-char	**get_megablock(int fd, int block_nb, int endl)
-{
-	char	**tetris;
-	char	*block;
-	int		i;
-	int		j;
-	char	*line;
-	char	*tmp;
+/*
+** Read, check and count all the tretris in the fd
+*/
 
-	tetris = (char **)malloc(sizeof(char *) * block_nb);
-	j = 0;
-	i = 1;
-	line = ft_strdup("");
-	while (j < (block_nb))
+int	read_tetri(char *file)
+{
+	char	buf[21];
+	int		i;
+	int		fd;
+
+	i = 0;
+	fd = open(file, O_RDONLY);
+	while (read(fd, buf, 21))
 	{
-		block = ft_strdup("");
-		while ((get_next_line(fd, &line) > 0) && (i % 5 != 0) && i++)
+		buf[20] = '\0';
+		if (piece_conformity(buf))
 		{
-			tmp = block;
-			if (endl)
-				line = ft_strjoin(line, "\n");
-			block = ft_strjoin(block, line);
-			free(tmp);
+			// printf("________\n");
+			// printf("%s", buf);
+			// printf("________\n");
+			// printf("VALEUR DE I [%d]\n", i);
+			fill_item(buf, i);
+			i++;
 		}
-		tetris[j] = ft_strdup(block);
-		free(block);
-		i++;
-		j++;
+		else
+			return (0);
 	}
-	return (tetris);
+	close(fd);
+	// printf("VALEUR DE I AVANT RETURN %d\n", i);
+	return (i);
+}
+
+int	check_and_read(char *file)
+{
+	if (!(check_general_conformity(file)))
+		return (0);
+	return (read_tetri(file));
 }

@@ -1,86 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   read_tetriminos.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/04 11:49:01 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/01/04 12:08:10 by ndelhomm         ###   ########.fr       */
+/*   Created: 2018/12/28 11:52:15 by ndelhomm          #+#    #+#             */
+/*   Updated: 2019/01/03 16:04:15 by jbrisset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 
-/*
-** Put the tetriminos the higher possible in the square
-*/
-void up_tetri(char ***tetri)
+void print_tetri(char tetri[5][5])
 {
-	int	i;
-	int	j;
-	int	first_hash;
-	int line_up;
-
-	i = 0;
-	first_hash = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			if ((*tetri)[i][j] == '#')
-			{
-				if (!first_hash)
-				{
-					first_hash = 1;
-					line_up = i;
-				}
-				(*tetri)[i][j] = '.';
-				(*tetri)[i - line_up][j] = '#';
-			}
-			j++;
-		}
-		i++;
-	}
+    int i;
+    
+    i = 0;
+    while (i < 4)
+    {
+        printf("%s\n", tetri[i]);
+        i++;
+    }
 }
 
-/*
-** Put the tetriminos the more left possible
-*/
-void	left_tetri(char ***tetri)
+int main(int argc, char **argv)
 {
-	int i;
-	int j;
-	int first_hash;
-	int column_left;
-	
-	j = 0;
-	first_hash = 0;
-	while (j < 4)
-	{
-		i = 3;
-		while (i >= 0)
-		{
-			if ((*tetri)[i][j] == '#')
-			{
-				if (!first_hash)
-				{
-					first_hash = 1;
-					column_left = j;
-				}
-				(*tetri)[i][j] = '.';
-				(*tetri)[i][j - column_left] = '#';
-			}
-		i--;
-		}
-	j++;
-	}
-}
+    (void)argc;
+    int block_nb;
+    int i;
 
-void	upleft_tetri(char ***tetri)
-{
-	up_tetri(tetri);
-	left_tetri(tetri);
+    i = 0;
+    if ((block_nb = check_and_read(argv[1])))
+    {
+        while (i < block_nb)
+        {
+            printf("_________\n");
+            print_tetri(t_items[i].tetri);
+            printf("height = %d\n", t_items[i].height);
+            printf("width = %d\n", t_items[i].width);
+            printf("x = %d\n", t_items[i].x);
+            printf("y = %d\n", t_items[i].y);
+            printf("_________\n");
+            i++;
+        }
+    }
+    return (0);
 }

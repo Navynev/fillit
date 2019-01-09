@@ -12,11 +12,6 @@
 
 #include "fillit.h"
 
-void    fill_item(char *buf, int index)
-{
-    fill_tetri(buf, index);
-}
-
 void    fill_tetri(char *buf, int index)
 {
     int     i;
@@ -38,4 +33,14 @@ void    fill_tetri(char *buf, int index)
         }
     i++;
     }
+    upleft_tetri(t_items[index].tetri);
+}
+
+void    fill_item(char *buf, int index)
+{
+    fill_tetri(buf, index);
+    t_items[index].height = get_height(t_items[index].tetri);
+    t_items[index].width = get_width(t_items[index].tetri);
+    t_items[index].x = 4;
+    t_items[index].y = 5;
 }
