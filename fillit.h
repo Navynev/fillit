@@ -27,7 +27,9 @@ struct	s_item {
 
 int		check_and_read(char *file);
 void	fill_item(char *buf, int index);
-void	upleft_tetri(char ***tetri);
+void	upleft_tetri(char (*tetri)[5][5]);
+int 	get_height(char tetri[5][5]);
+int 	get_width(char tetri[5][5]);
 int		get_min_size(int tetri_nb);
 int		allocate_square(char ***square, int size);
 

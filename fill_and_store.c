@@ -33,7 +33,7 @@ void    fill_tetri(char *buf, int index)
         }
     i++;
     }
-    upleft_tetri(t_items[index].tetri);
+    upleft_tetri(&t_items[index].tetri);
 }
 
 void    fill_item(char *buf, int index)

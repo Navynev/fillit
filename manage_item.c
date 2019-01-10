@@ -15,7 +15,7 @@
 /*
 ** Put the tetriminos the higher possible in the square
 */
-void up_tetri(char ***tetri)
+void up_tetri(char (*tetri)[5][5])
 {
 	int	i;
 	int	j;
@@ -48,7 +48,7 @@ void up_tetri(char ***tetri)
 /*
 ** Put the tetriminos the more left possible
 */
-void	left_tetri(char ***tetri)
+void	left_tetri(char (*tetri)[5][5])
 {
 	int i;
 	int j;
@@ -78,13 +78,13 @@ void	left_tetri(char ***tetri)
 	}
 }
 
-void	upleft_tetri(char ***tetri)
+void	upleft_tetri(char (*tetri)[5][5])
 {
 	up_tetri(tetri);
 	left_tetri(tetri);
 }
 
-int get_height(char **tetri)
+int get_height(char tetri[5][5])
 {
     int i;
     int j;
@@ -110,7 +110,7 @@ int get_height(char **tetri)
     return (h);
 }
 
-int get_width(char **tetri)
+int get_width(char tetri[5][5])
 {
     int i;
     int j;
