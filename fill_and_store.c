@@ -12,6 +12,10 @@
 
 #include "fillit.h"
 
+/*
+** Fill the tetri variable of the 'index' structure passed in parameter with
+** the parameter *buf.
+*/
 void    fill_tetri(char *buf, int index)
 {
     int     i;
@@ -34,7 +38,12 @@ void    fill_tetri(char *buf, int index)
     i++;
     }
     upleft_tetri(&t_items[index].tetri);
+    sharp_to_alpha(&t_items[index].tetri, index);
 }
+
+/*
+** Fill the structure 'item' individually, according to the parameter 'index'
+*/
 
 void    fill_item(char *buf, int index)
 {
@@ -43,4 +52,32 @@ void    fill_item(char *buf, int index)
     t_items[index].width = get_width(t_items[index].tetri);
     t_items[index].x = 4;
     t_items[index].y = 5;
+}
+
+/*
+** Replace all the sharps by the letter corresponding to the given index
+*/
+
+void    sharp_to_alpha(char (*tetri)[5][5], int index)
+{
+    char letter;
+    int i;
+    int j;
+
+    letter = index + 65;
+    i = 0;
+    j = 0;
+    while (i < 4)
+    {
+        j = 0;
+        while (j < 4)
+        {
+            if ((*tetri)[i][j] == '#')
+            {
+                (*tetri)[i][j] = letter;
+            }
+        j++;
+        }
+    i++;
+    }
 }

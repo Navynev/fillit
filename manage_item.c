@@ -97,7 +97,7 @@ int get_height(char tetri[5][5])
         j = 0;
         while (j < 4 && i < 4)
         {
-            if (tetri[i][j] == '#')
+            if (tetri[i][j] != '.')
             {
                 h++;
                 i++;
@@ -124,7 +124,7 @@ int get_width(char tetri[5][5])
         i = 0;
         while (j < 4 && i < 4)
         {
-            if (tetri[i][j] == '#')
+            if (tetri[i][j] != '.')
             {
                 w++;
                 j++;
