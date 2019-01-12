@@ -52,48 +52,58 @@ int		allocate_square(char ***square, int size)
 	return (1);
 }
 
-/*int	main(int argc, char **argv)
+int	block_fit(char **board, int item_nb, int x, int y, int size)
 {
-	int		fd;
-	char	*line;
-	char	*tetri;
-	int		block_nb;
-	char	**megablock;
-	int		i;
-	int		error;
-	char	**square;
+	int	i;
+	int	j;
 
-	error = 0;
 	i = 0;
-	square = NULL;
-	(void)argc;
-	line = ft_strdup("");
-	tetri = ft_strdup("");
-	fd = open((argv[1]), O_RDONLY);
-	if (!(block_nb = 10))
+	j = 0;
+	if (t_items[item_nb].width > (size - x)
+		|| t_items[item_nb]. height > (size - y))
+		{
+			printf("first return 0");
+			return (0);
+		}
+	while (i < t_items[item_nb].height)
 	{
-		printf("error in file conformity\n");
-		return (0);
+		j = 0;
+		while (j < t_items[item_nb].width)
+		{
+			if (t_items[item_nb].tetri[i][j] != '.' && board[x + i][y + j] != '.')
+			{
+				printf("%c\n", t_items[item_nb].tetri[i][j]);
+				printf("i = %d, j = %d\n", i, j);
+				return (0);
+			
+			}
+			j++;
+		}
+	i++;
 	}
-	close(fd);
-	fd = open((argv[1]), O_RDONLY);
-	megablock = get_megablock(fd, block_nb, 0);
-	close(fd);
-	while (i < block_nb)
+	t_items[item_nb].x = x;
+	t_items[item_nb].y = y;
+	return (1);
+}
+
+int	place_item(char ***board, int item_nb, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (j < t_items[item_nb].height)
 	{
-		if (!(piece_conformity(megablock[i])))
-			error++;
-		i++;
+		i = 0;
+		while (i < t_items[item_nb].width)
+		{
+			// printf("%c - ", t_items[item_nb].tetri[i][j]);
+			if (t_items[item_nb].tetri[i][j] != '.')
+				(*board)[x + i][y + j] = t_items[item_nb].tetri[i][j];
+			i++;
+		}
+	j++;
 	}
-	if (error)
-		printf("error in tetriminos");
-	
-	printf("%d\n", get_min_size(block_nb));
-	allocate_square(&square, get_min_size(block_nb));
-	while (i < get_min_size(block_nb))
-	{
-		printf("%s\n", square[i]);
-		i++;
-	}
-	return (0);
-}*/
+	return (1);
+}

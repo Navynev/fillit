@@ -25,13 +25,27 @@ void print_tetri(char tetri[5][5])
     }
 }
 
+void print_board(char **board)
+{
+    int i;
+    
+    i = 0;
+    while (i < 4)
+    {
+        printf("%s\n", board[i]);
+        i++;
+    }
+}
+
 int main(int argc, char **argv)
 {
     (void)argc;
     int block_nb;
     int i;
+    char **board;
 
     i = 0;
+    //block_nb = check_and_read(argv[1]);
     if ((block_nb = check_and_read(argv[1])))
     {
         while (i < block_nb)
@@ -46,5 +60,12 @@ int main(int argc, char **argv)
             i++;
         }
     }
+
+    board = NULL;
+    allocate_square(&board, get_min_size(block_nb));
+    place_item(&board, 0, 0, 0);
+    print_board(board);
+    printf("__________________\n");
+    printf("block fit = %d\n", block_fit(board, 1, 0, 1, get_min_size(block_nb)));
     return (0);
 }

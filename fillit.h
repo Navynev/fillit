@@ -33,6 +33,8 @@ int 	get_width(char tetri[5][5]);
 int		get_min_size(int tetri_nb);
 int		allocate_square(char ***square, int size);
 void    sharp_to_alpha(char (*tetri)[5][5], int index);
+int		block_fit(char **board, int item_nb, int x, int y, int size);
+int		place_item(char ***board, int item_nb, int x, int y);
 
 #endif
 
