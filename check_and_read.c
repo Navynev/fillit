@@ -6,7 +6,7 @@
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 11:52:15 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/01/14 15:06:07 by jbrisset         ###   ########.fr       */
+/*   Updated: 2019/01/14 16:55:33 by ndelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int	check_general_conformity(char *file)
 
 	i = 1;
 	line = ft_strdup("");
-	fd = open(file, O_RDONLY);
+	if (!(fd = open(file, O_RDONLY)))
+		return (0);
 	while ((res = get_next_line(fd, &line)) > 0)
 	{
 		if ((i % 5 == 0) && line[0] != 0)
@@ -112,7 +113,8 @@ int	read_tetri(char *file)
 	int		fd;
 
 	i = 0;
-	fd = open(file, O_RDONLY);
+	if (!(fd = open(file, O_RDONLY)))
+		return (0);
 	while (read(fd, buf, 21))
 	{
 		buf[20] = '\0';

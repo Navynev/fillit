@@ -6,7 +6,7 @@
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 11:52:15 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/01/14 16:28:39 by jbrisset         ###   ########.fr       */
+/*   Updated: 2019/01/14 16:56:07 by ndelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,17 @@ int		main(int argc, char **argv)
 	char	**board;
 	int		size;
 
-	(void)argc;
 	board = NULL;
-	if (!(block_nb = check_and_read(argv[1])))
+	if (argc != 2)
+	{
+		ft_putstr("usage: ./fillit file\n");
 		return (0);
+	}
+	if (!(block_nb = check_and_read(argv[1])))
+	{
+		ft_putstr("error\n");
+		return (0);
+	}
 	size = get_min_size(block_nb);
 	allocate_board(&board, size);
 	while (resolve(&board, 0, block_nb, size) == 0)
