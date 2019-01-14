@@ -1,32 +1,48 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: jbrisset <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/12/21 11:48:21 by ndelhomm          #+#    #+#              #
-#    Updated: 2018/12/21 11:59:49 by ndelhomm         ###   ########.fr        #
+#    Created: 2019/01/14 17:01:23 by jbrisset          #+#    #+#              #
+#    Updated: 2019/01/14 17:09:42 by jbrisset         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
-NAME = fillit.out
-FLAG = -Wall -Werror -Wextra
-SRC = check_tetriminos.c main.c
-HEADER = fillit.h
-OBJ = $(SRC:%.c=%.o)
+NAME		=	fillit
+HEADER		=	fillit.h
+SRC			=	check_and_read.c\
+				fill_item.c\
+				set_item.c\
+				manage_board.c\
+				main.c\
+OBJ			=	$(SRC:%.c=%.o)
+FLAGS		=	-Wall -Wextra -Werror
+RM			=	/bin/rm -f
 
-all: $(NAME)
+$(NAME)	:		$(OBJ) $(HEADER)
+				gcc $(FLAGS) -c
 
-$(NAME): $(OBJ) $(HEADER)
-	gcc $(FLAG) -c $(SRC) -I $(HEADER) 
-	ar rc $(NAME) $(OBJ)
-	/bin/rm -rf $(OBJ)
+clean	:
+				@(cd $(DIROBJ) && $(RM) $(OBJ))
+ifdef SUB_MAKE
+				@(cd $(SUB_MAKE) && $(MAKE) clean)
+endif
+				@$(ECHO) '> Directory cleaned'
 
-clean:
-	/bin/rm -f $(OBJ)
+all		:		$(NAME)
 
-fclean: clean
-	/bin/rm -f $(NAME)
+fclean	:		clean
+ifdef SUB_MAKE
+				@(cd $(SUB_MAKE) && $(MAKE) fclean)
+endif
+				-@$(RM) $(NAME)
+				@$(ECHO) '> Remove executable'
 
-re: fclean all
+re		:		fclean all
+
+.PHONY	:		all clean re
+
+%.o		:		$(DIRSRC)/%.c
+				$(CC) $(INCLUDE) $(CFLAGS) -o $(DIROBJ)/$@ -c $<
