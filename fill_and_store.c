@@ -50,8 +50,8 @@ void    fill_item(char *buf, int index)
     fill_tetri(buf, index);
     t_items[index].height = get_height(t_items[index].tetri);
     t_items[index].width = get_width(t_items[index].tetri);
-    t_items[index].x = 4;
-    t_items[index].y = 5;
+    t_items[index].l = -1;
+    t_items[index].c = -1;
 }
 
 /*
@@ -77,6 +77,27 @@ void    sharp_to_alpha(char (*tetri)[5][5], int index)
                 (*tetri)[i][j] = letter;
             }
         j++;
+        }
+    i++;
+    }
+}
+
+void    remove_item(char ***board, int size, int item_index)
+{
+    int     i;
+    int     j;
+    char    c;
+
+    c = item_index + 65;
+    i = 0;
+    while (i < size)
+    {
+        j = 0;
+        while (j < size)
+        {
+            if ((*board)[i][j] == c)
+                (*board)[i][j] = '.';
+            j++;
         }
     i++;
     }

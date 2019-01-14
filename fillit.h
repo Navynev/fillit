@@ -21,8 +21,8 @@ struct	s_item {
 	int		height;
 	int		width;
 	char	tetri[5][5];
-	int		x;
-	int		y;
+	int		l;
+	int		c;
 }				t_items[26];
 
 int		check_and_read(char *file);
@@ -33,8 +33,10 @@ int 	get_width(char tetri[5][5]);
 int		get_min_size(int tetri_nb);
 int		allocate_square(char ***square, int size);
 void    sharp_to_alpha(char (*tetri)[5][5], int index);
-int		block_fit(char **board, int item_nb, int x, int y, int size);
-int		place_item(char ***board, int item_nb, int x, int y);
+int		block_fit(char **board, int item_nb, int l, int c, int size);
+int		place_item(char ***board, int item_nb, int l, int c);
+void    remove_item(char ***board, int size, int item_index);
+
 
 #endif
 

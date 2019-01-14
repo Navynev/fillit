@@ -52,17 +52,29 @@ int		allocate_square(char ***square, int size)
 	return (1);
 }
 
-int	block_fit(char **board, int item_nb, int x, int y, int size)
+void	free_board(char ***board, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free((*board)[i]);
+		i++;
+	}
+	free(board);
+}
+
+int	block_fit(char **board, int item_nb, int l, int c, int size)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	if (t_items[item_nb].width > (size - x)
-		|| t_items[item_nb]. height > (size - y))
+	if (t_items[item_nb].width > (size - c)
+		|| t_items[item_nb].height > (size - l))
 		{
-			printf("first return 0");
 			return (0);
 		}
 	while (i < t_items[item_nb].height)
@@ -70,10 +82,8 @@ int	block_fit(char **board, int item_nb, int x, int y, int size)
 		j = 0;
 		while (j < t_items[item_nb].width)
 		{
-			if (t_items[item_nb].tetri[i][j] != '.' && board[x + i][y + j] != '.')
+			if (t_items[item_nb].tetri[i][j] != '.' && board[l + i][c + j] != '.')
 			{
-				printf("%c\n", t_items[item_nb].tetri[i][j]);
-				printf("i = %d, j = %d\n", i, j);
 				return (0);
 			
 			}
@@ -81,29 +91,28 @@ int	block_fit(char **board, int item_nb, int x, int y, int size)
 		}
 	i++;
 	}
-	t_items[item_nb].x = x;
-	t_items[item_nb].y = y;
+	t_items[item_nb].l = l;
+	t_items[item_nb].c = c;
 	return (1);
 }
 
-int	place_item(char ***board, int item_nb, int x, int y)
+int	place_item(char ***board, int item_nb, int l, int c)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = 0;
-	while (j < t_items[item_nb].height)
+	while (i < t_items[item_nb].height)
 	{
-		i = 0;
-		while (i < t_items[item_nb].width)
+		j = 0;
+		while (j < t_items[item_nb].width)
 		{
 			// printf("%c - ", t_items[item_nb].tetri[i][j]);
-			if (t_items[item_nb].tetri[i][j] != '.')
-				(*board)[x + i][y + j] = t_items[item_nb].tetri[i][j];
-			i++;
+			if (t_items[item_nb].tetri[i][j] != '.' && (*board)[l + i][c + j] == '.')
+				(*board)[l + i][c + j] = t_items[item_nb].tetri[i][j];
+			j++;
 		}
-	j++;
+	i++;
 	}
 	return (1);
 }

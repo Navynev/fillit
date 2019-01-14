@@ -37,35 +37,39 @@ void print_board(char **board)
     }
 }
 
+int resolve(char ***board, int item_index, int item_nb, int size)
+{
+    int l;
+    int c;
+
+    l = 0;
+    c = 0;
+    while (item_index < item_nb)
+    {
+
+        if (block_fit((*board), item_index, l, c, size))
+        {
+            place_item(&board, item_index, l, c);
+
+        }
+    item_index++;
+    }
+}
+
 int main(int argc, char **argv)
 {
     (void)argc;
     int block_nb;
     int i;
     char **board;
+    int l;
+    int c;
+    int size;
 
-    i = 0;
-    //block_nb = check_and_read(argv[1]);
-    if ((block_nb = check_and_read(argv[1])))
-    {
-        while (i < block_nb)
-        {
-            printf("_________\n");
-            print_tetri(t_items[i].tetri);
-            printf("height = %d\n", t_items[i].height);
-            printf("width = %d\n", t_items[i].width);
-            printf("x = %d\n", t_items[i].x);
-            printf("y = %d\n", t_items[i].y);
-            printf("_________\n");
-            i++;
-        }
-    }
-
-    board = NULL;
-    allocate_square(&board, get_min_size(block_nb));
-    place_item(&board, 0, 0, 0);
-    print_board(board);
-    printf("__________________\n");
-    printf("block fit = %d\n", block_fit(board, 1, 0, 1, get_min_size(block_nb)));
+    if (!(block_nb = check_and_read(argv[1])))
+        return (0);
+    size = get_min_size(block_nb);
+    allocate_square(&board, si)
+    resolve(&board, 0, block_nb, size);
     return (0);
 }
