@@ -36,6 +36,7 @@ void    sharp_to_alpha(char (*tetri)[5][5], int index);
 int		block_fit(char **board, int item_nb, int l, int c, int size);
 int		place_item(char ***board, int item_nb, int l, int c);
 void    remove_item(char ***board, int size, int item_index);
+void	free_board(char ***board, int size);
 
 
 #endif

@@ -35,6 +35,7 @@ int		allocate_square(char ***square, int size)
 	int	j;
 
 	i = 0;
+	printf("allocate\n");
 	if (!(*square = (char **)malloc(sizeof(char *) * size)))
 		return (0);
 	while (i < size)
@@ -59,10 +60,9 @@ void	free_board(char ***board, int size)
 	i = 0;
 	while (i < size)
 	{
-		free((*board)[i]);
+		ft_strdel(&(*board)[i]);
 		i++;
 	}
-	free(board);
 }
 
 int	block_fit(char **board, int item_nb, int l, int c, int size)
@@ -107,7 +107,6 @@ int	place_item(char ***board, int item_nb, int l, int c)
 		j = 0;
 		while (j < t_items[item_nb].width)
 		{
-			// printf("%c - ", t_items[item_nb].tetri[i][j]);
 			if (t_items[item_nb].tetri[i][j] != '.' && (*board)[l + i][c + j] == '.')
 				(*board)[l + i][c + j] = t_items[item_nb].tetri[i][j];
 			j++;

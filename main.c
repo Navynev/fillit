@@ -12,64 +12,66 @@
 
 #include "fillit.h"
 
-
-void print_tetri(char tetri[5][5])
+void print_board(char **board, int size)
 {
     int i;
     
     i = 0;
-    while (i < 4)
+    while (i < size)
     {
-        printf("%s\n", tetri[i]);
+        ft_putstr(board[i]);
+        ft_putchar('\n');
         i++;
     }
 }
 
-void print_board(char **board)
-{
-    int i;
-    
-    i = 0;
-    while (i < 4)
-    {
-        printf("%s\n", board[i]);
-        i++;
-    }
-}
-
-int resolve(char ***board, int item_index, int item_nb, int size)
+int resolve(char ***board, int index, int item_nb, int size)
 {
     int l;
     int c;
+    static int finish;
 
     l = 0;
-    c = 0;
-    while (item_index < item_nb)
+    while (l < size && finish == 0)
     {
-
-        if (block_fit((*board), item_index, l, c, size))
+        c = 0;
+        while (c < size && finish == 0)
         {
-            place_item(&board, item_index, l, c);
-
+            if (block_fit(*board, index, l, c, size))
+            {
+                place_item(board, index, t_items[index].l, t_items[index].c);
+                if (index == item_nb - 1)
+                    finish = 1;
+                resolve(board, index + 1, item_nb, size);
+            }
+        c++;
         }
-    item_index++;
+    l++;
     }
+    if (!finish && !index)
+        return (0);
+    if (!finish)
+        remove_item(board, size, index - 1);
+    return (1);
 }
 
 int main(int argc, char **argv)
 {
     (void)argc;
     int block_nb;
-    int i;
     char **board;
-    int l;
-    int c;
     int size;
 
+    board = NULL;
     if (!(block_nb = check_and_read(argv[1])))
         return (0);
     size = get_min_size(block_nb);
-    allocate_square(&board, si)
-    resolve(&board, 0, block_nb, size);
+    allocate_square(&board, size);
+    while (resolve(&board, 0, block_nb, size) == 0)
+    {
+        free_board(&board, size);
+        allocate_square(&board, ++size);
+    }
+    print_board(board, size);
     return (0);
 }
