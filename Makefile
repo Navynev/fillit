@@ -6,43 +6,39 @@
 #    By: jbrisset <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/14 17:01:23 by jbrisset          #+#    #+#              #
-#    Updated: 2019/01/14 17:09:42 by jbrisset         ###   ########.fr        #
+#    Updated: 2019/01/15 10:44:04 by ndelhomm         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME		=	fillit
+
 HEADER		=	fillit.h
+
 SRC			=	check_and_read.c\
 				fill_item.c\
 				set_item.c\
 				manage_board.c\
 				main.c\
-OBJ			=	$(SRC:%.c=%.o)
+
+OBJ			= 	$(SRC:%.c=%.o)
+
 FLAGS		=	-Wall -Wextra -Werror
-RM			=	/bin/rm -f
 
-$(NAME)	:		$(OBJ) $(HEADER)
-				gcc $(FLAGS) -c
+all: $(NAME)
 
-clean	:
-				@(cd $(DIROBJ) && $(RM) $(OBJ))
-ifdef SUB_MAKE
-				@(cd $(SUB_MAKE) && $(MAKE) clean)
-endif
-				@$(ECHO) '> Directory cleaned'
+$(NAME) : $(OBJ)
+	gcc $(FLAGS) $(OBJ) -L libft/ -lft -o $(NAME)
 
-all		:		$(NAME)
+%.o: %.c
+	gcc $(FLAGS) -I $(HEADER) -c  $< -o $@
 
-fclean	:		clean
-ifdef SUB_MAKE
-				@(cd $(SUB_MAKE) && $(MAKE) fclean)
-endif
-				-@$(RM) $(NAME)
-				@$(ECHO) '> Remove executable'
+clean:
+	/bin/rm -f $(OBJ)
 
-re		:		fclean all
+fclean	: clean
+	/bin/rm -f $(NAME)
 
-.PHONY	:		all clean re
 
-%.o		:		$(DIRSRC)/%.c
-				$(CC) $(INCLUDE) $(CFLAGS) -o $(DIROBJ)/$@ -c $<
+re		: fclean all
+
+.PHONY	: all clean fclean re
