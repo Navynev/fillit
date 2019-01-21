@@ -125,6 +125,7 @@ int	read_tetri(char *file)
 		}
 		else
 			return (0);
+		ft_bzero(buf, 21);
 	}
 	close(fd);
 	return (i);
