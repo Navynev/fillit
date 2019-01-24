@@ -6,7 +6,7 @@
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 11:52:15 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/01/15 10:29:21 by ndelhomm         ###   ########.fr       */
+/*   Updated: 2019/01/24 14:18:05 by ndelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,22 @@ int	check_general_conformity(char *file)
 	int		fd;
 
 	i = 1;
-	line = ft_strdup("");
+	line = NULL;
 	if (!(fd = open(file, O_RDONLY)))
 		return (0);
 	while ((res = get_next_line(fd, &line)) > 0)
 	{
-		if ((i % 5 == 0) && line[0] != 0)
-			return (0);
-		if ((i % 5 != 0) && ft_strlen(line) != 4)
+		
+		if (((i % 5 == 0) && line[0] != 0) || ((i % 5 != 0) && ft_strlen(line) != 4) || (i > 130))
 			return (0);
 		++i;
-		if (i > 130)
-			return (0);
+		//free(line);
+		//if ((i % 5 != 0) && ft_strlen(line) != 4)
+			//return (0);
 	}
 	if (*line == 0)
 		return (0);
+	//free(line);
 	close(fd);
 	return (i / 5);
 }

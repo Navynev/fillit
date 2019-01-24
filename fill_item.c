@@ -6,7 +6,7 @@
 /*   By: ndelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 11:52:15 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/01/14 16:17:39 by jbrisset         ###   ########.fr       */
+/*   Updated: 2019/01/22 14:20:37 by ndelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,15 @@ void	fill_tetri(char *buf, int index)
 	i = 0;
 	k = 0;
 	j = 0;
-	while (buf[i])
+	while (buf[i++])
 	{
-		if (buf[i] == '\n')
+		if (buf[i - 1] == '\n')
 		{
 			ft_strncpy(t_items[index].tetri[k], &buf[j], 4);
 			t_items[index].tetri[k][4] = '\0';
 			k++;
-			i++;
 			j = i;
 		}
-		i++;
 	}
 	upleft_tetri(&t_items[index].tetri);
 	sharp_to_alpha(&t_items[index].tetri, index);

@@ -6,7 +6,7 @@
 #    By: jbrisset <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/14 17:01:23 by jbrisset          #+#    #+#              #
-#    Updated: 2019/01/21 11:48:49 by jbrisset         ###   ########.fr        #
+#    Updated: 2019/01/22 14:25:54 by ndelhomm         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,6 +23,10 @@ SRC			=	check_and_read.c\
 OBJ			= 	$(SRC:%.c=%.o)
 
 FLAGS		=	-Wall -Wextra -Werror
+
+#if ($(SANITIZE))
+FLAGS		+=	-g
+#endif
 
 all: $(NAME)
 
